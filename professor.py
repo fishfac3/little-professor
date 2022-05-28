@@ -22,7 +22,7 @@ def check_solution(level, operator):
         elif operator == "*":
             solution = num1 * num2
         elif operator == "/":
-            solution = round((num1 / num2), 2)
+            solution = num1 // num2
         
         if user_solution == solution:
             correct_answers += 1
@@ -52,6 +52,8 @@ def get_user_solution(n1, n2, operator):
 def get_operator():
     try:
         operator = input("Enter a operant (+,-,*,/): ")
+        if operator == "/":
+            print("You don't have to care about decimal places!")
         if operator not in ["+", "-", "*", "/"]:
             raise ValueError
         else:
