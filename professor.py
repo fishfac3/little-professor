@@ -13,31 +13,40 @@ def check_solution(level, operator):
     wrong_answer = 0
     for _ in range(10):
         num1, num2 = generate_integer(level)
-        user_solution = get_user_solution(num1, num2)
-        solution = num1 + num2
+        user_solution = get_user_solution(num1, num2, operator)
+
+        if operator == "+":
+            solution = num1 + num2
+        elif operator == "-":
+            solution = num1 - num2
+        elif operator == "*":
+            solution = num1 * num2
+        elif operator == "/":
+            solution = round((num1 / num2), 2)
+        
         if user_solution == solution:
             correct_answers += 1
         else:
             while wrong_answer < 2:
                 print("EEE")
                 wrong_answer += 1
-                user_solution = get_user_solution(num1, num2)
+                user_solution = get_user_solution(num1, num2, operator)
                 if user_solution == solution:
                     print(wrong_answer)
                     wrong_answer = 0
                     break
             if wrong_answer >= 2:
-                print(f"{num1} + {num2} = {solution}")
+                print(f"{num1} {operator} {num2} = {solution}")
                 wrong_answer = 0
     return correct_answers
 
 
-def get_user_solution(n1, n2):
+def get_user_solution(n1, n2, operator):
     try:
-        user_solution = int(input(f"{n1} + {n2} = "))
+        user_solution = int(input(f"{n1} {operator} {n2} = "))
         return user_solution
     except ValueError:
-        get_user_solution(n1, n2)
+        get_user_solution(n1, n2, operator)
 
 
 def get_operator():
