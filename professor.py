@@ -3,6 +3,12 @@ import sys
 
 def main():
     level = get_level()
+    operator = get_operator()
+    print("Score:", check_solution(level, operator))
+    sys.exit()
+
+
+def check_solution(level, operator):
     correct_answers = 0
     wrong_answer = 0
     for _ in range(10):
@@ -23,9 +29,7 @@ def main():
             if wrong_answer >= 2:
                 print(f"{num1} + {num2} = {solution}")
                 wrong_answer = 0
-
-    print("Score:", correct_answers)
-    sys.exit()
+    return correct_answers
 
 
 def get_user_solution(n1, n2):
@@ -36,9 +40,20 @@ def get_user_solution(n1, n2):
         get_user_solution(n1, n2)
 
 
+def get_operator():
+    try:
+        operator = input("Enter a operant (+,-,*,/): ")
+        if operator not in ["+", "-", "*", "/"]:
+            raise ValueError
+        else:
+            return operator
+    except ValueError:
+        get_operator()
+
+
 def get_level():
     try:
-        level = int(input("Level: "))
+        level = int(input("Enter a level between 1 and 3: "))
         if level < 1 or level > 3:
             raise ValueError
         else:
